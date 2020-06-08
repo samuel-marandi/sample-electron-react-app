@@ -1,0 +1,29 @@
+{
+  "name": "sample-electron-react-app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuel-marandi/sample-electron-react-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samuel-marandi/sample-electron-react-app/issues"
+  },
+  "homepage": "https://github.com/samuel-marandi/sample-electron-react-app#readme",
+  "devDependencies": {
+    "electron": "^9.0.3",
+    "electron-builder": "^22.7.0"
+  },
+  "dependencies": {
+    "electron-updater": "^4.3.1"
+  }
+}
