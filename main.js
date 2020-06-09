@@ -28,6 +28,10 @@ function createWindow () {
 app.on('ready', async () => {
     //try to update!
     try {
+        ipcMain.on('app_version', (event) => {
+            event.sender.send('app_version', { version: app.getVersion() });
+        })
+
         const info = await autoUpdater.checkForUpdatesAndNotify();
         logger.info('checkForUpdatesAndNotify');
         logger.info(JSON.stringify(info));
@@ -59,6 +63,10 @@ app.on('ready', async () => {
             logger.info(error.message);
             logger.info(error.stack);
         });
+
+        ipcMain.on('restart_app', () => {
+            autoUpdater.quitAndInstall();
+        });
     } catch (error) {
         logger.info('autoupdate failed');
     }
@@ -78,9 +86,9 @@ app.on('activate', function () {
     }
 });
 
-ipcMain.on('app_version', (event) => {
-    event.sender.send('app_version', { version: app.getVersion() });
-});
+// ipcMain.on('app_version', (event) => {
+//     event.sender.send('app_version', { version: app.getVersion() });
+// });
 
 // autoUpdater.on('update-available', () => {
 //     logger.info("Update available")
@@ -92,6 +100,6 @@ ipcMain.on('app_version', (event) => {
 //     mainWindow.webContents.send('update_downloaded');
 // });
 
-ipcMain.on('restart_app', () => {
-    autoUpdater.quitAndInstall();
-});
+// ipcMain.on('restart_app', () => {
+//     autoUpdater.quitAndInstall();
+// });
