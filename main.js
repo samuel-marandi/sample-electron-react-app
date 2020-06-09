@@ -29,12 +29,13 @@ app.on('ready', async () => {
     //try to update!
     try {
         ipcMain.on('app_version', (event) => {
+            logger.info("Firing app version");
             event.sender.send('app_version', { version: app.getVersion() });
         })
 
         const info = await autoUpdater.checkForUpdatesAndNotify();
         logger.info('checkForUpdatesAndNotify');
-        logger.info(JSON.stringify(info));
+        // logger.info(JSON.stringify(info));
         
 
         autoUpdater.on('update-downloaded', info => {
@@ -65,6 +66,7 @@ app.on('ready', async () => {
         });
 
         ipcMain.on('restart_app', () => {
+            logger.info("Doing a quit and install");
             autoUpdater.quitAndInstall();
         });
     } catch (error) {
